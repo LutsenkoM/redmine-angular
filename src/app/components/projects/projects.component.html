@@ -1,7 +1,7 @@
-<ul>
-  <li *ngFor="let project of projects">
-    <p>ID: {{project.id}}</p>
-    <h3>Name: {{project.name}}</h3>
-    <p>Description: {{project.description}}</p>
-  </li>
-</ul>
+<h1>Projects</h1>
+<mat-card *ngFor="let project of projects.projects">
+  <p>ID: {{project.id}}</p>
+  <a [routerLink]="['/projects', project.id]" >{{project.name}}</a>
+  <mat-card-content>Description: {{project.description}}</mat-card-content>
+</mat-card>
+<button mat-button>Click me!</button>

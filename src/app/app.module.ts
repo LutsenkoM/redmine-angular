@@ -7,17 +7,24 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ApiService} from "./api.service";
 import {FormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MyOwnCustomMaterialModule} from "./material";
+import { SingleProjectComponent } from './components/single-project/single-project.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    SingleProjectComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MyOwnCustomMaterialModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

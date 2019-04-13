@@ -17,7 +17,7 @@ export class ProjectsComponent implements OnInit {
     this.apiService
         .getProject()
         .subscribe((projects: Projects[]) =>{
-          this.projects = projects.projects;
+          this.projects = projects;
           console.log(this.projects);
         });
   }

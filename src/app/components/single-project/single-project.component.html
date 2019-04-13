@@ -1,0 +1,11 @@
+<h2>Welcome to single car component {{id}}</h2>
+<h3>{{name}}</h3>
+
+<h2>Issues</h2>
+<ul>
+  <li *ngFor="let issue of issues.issues">
+    <p>{{issue.id}}</p>
+    <p>{{issue.subject}}</p>
+    <p>{{issue.start_date}}</p>
+  </li>
+</ul>
