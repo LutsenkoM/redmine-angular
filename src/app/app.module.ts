@@ -10,13 +10,15 @@ import {FormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MyOwnCustomMaterialModule} from "./material";
 import { SingleProjectComponent } from './components/single-project/single-project.component';
+import { SingleIssueComponent } from './components/single-issue/single-issue.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectsComponent,
-    SingleProjectComponent
+    SingleProjectComponent,
+    SingleIssueComponent
   ],
   imports: [
     BrowserModule,

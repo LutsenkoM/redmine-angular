@@ -4,7 +4,6 @@ import {ApiService} from "../../api.service";
 import {Issues} from "../../issues";
 import {Projects} from "../../projects";
 
-
 @Component({
   selector: 'app-single-project',
   templateUrl: './single-project.component.html',
@@ -14,7 +13,7 @@ export class SingleProjectComponent implements OnInit {
 
   id: number;
   name: string;
-
+  newIssue: string = '';
   issues: Issues[] = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
@@ -25,25 +24,30 @@ export class SingleProjectComponent implements OnInit {
       this.name = params['name'];
     });
 
-    console.log(this.id);
-
-
-    this.apiService
-        .getIssues( this.id )
-        .subscribe((issues: Issues[]) =>{
-          this.issues = issues;
-          console.log();
-        })
-        .(error) => { alert("Error!!!")};
+    this.getIssuesList();
 
   }
 
-  // displayIssues(project: Issues) {
-  //
-  //   this.api
-  //       .getIssues(project)
-  //       .subscribe()
-  //
-  // }
+  public getIssuesList() {
+      this.apiService
+          .getIssues( this.id )
+          .subscribe((issues: Issues[]) =>{
+                  this.issues = issues;
+              },
+              (error) => { alert("Error!!!")});
+  }
+
+  public addIssue() {
+    this.apiService
+        .addIssue(this.newIssue, this.id)
+        .subscribe((response) => {
+            this.getIssuesList()
+        });
+    this.newIssue = '';
+  }
+
+
+
+
 
 }
