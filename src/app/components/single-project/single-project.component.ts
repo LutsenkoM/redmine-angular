@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {ApiService} from "../../api.service";
-import {Issues} from "../../issues";
+import {ActivatedRoute, Params} from '@angular/router';
+import {ApiService} from '../../api.service';
+import {Issues} from '../../issues';
 import {Projects} from "../../projects";
 
 @Component({
@@ -13,7 +13,7 @@ export class SingleProjectComponent implements OnInit {
 
   id: number;
   name: string;
-  newIssue: string = '';
+  newIssue: string;
   issues: Issues[] = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
@@ -31,17 +31,18 @@ export class SingleProjectComponent implements OnInit {
   public getIssuesList() {
       this.apiService
           .getIssues( this.id )
-          .subscribe((issues: Issues[]) =>{
+          .subscribe((issues: Issues[]) => {
                   this.issues = issues;
               },
-              (error) => { alert("Error!!!")});
+              (error) => {alert('Sory, server don\'t response'); }
+              );
   }
 
   public addIssue() {
     this.apiService
         .addIssue(this.newIssue, this.id)
         .subscribe((response) => {
-            this.getIssuesList()
+            this.getIssuesList();
         });
     this.newIssue = '';
   }

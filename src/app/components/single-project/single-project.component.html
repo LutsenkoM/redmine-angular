@@ -1,8 +1,10 @@
 
-<div class="row">
-  <div class="col-xs-8 offset-2">
+
+  <div class="col-xs-12">
+    <b><a [routerLink]="['/projects']"><< Back</a></b>
+    <hr/>
     <h2>Issues</h2>
-    <div class="input-group m">
+    <div class="input-group">
       <input  [(ngModel)]="newIssue" type="text"
               class="form-control"
               placeholder="Add new Issue"
@@ -15,11 +17,10 @@
     <hr/>
     <ul class="list-group">
       <li *ngFor="let issue of issues.issues" class="list-group-item">
-        <p>{{issue.id}}</p>
-        <a [routerLink]="['/projects', id, name, issue.id, issue.subject ]" >{{issue.subject}}</a>
-        <p>{{issue.start_date}}</p>
+        <h3><a [routerLink]="['/projects', id, name, issue.id, issue.subject ]" >#{{issue.id}}, {{issue.subject}} </a></h3>
+        <p>Date: {{issue.start_date | date: 'shortDate'}}</p>
+        <p>Priority: {{issue.priority.name}}</p>
       </li>
     </ul>
   </div>
 
-</div>

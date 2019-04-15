@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Issues} from "../../issues";
-import {ActivatedRoute, Params} from "@angular/router";
-import {ApiService} from "../../api.service";
+import {Issues} from '../../issues';
+import {ActivatedRoute, Params} from '@angular/router';
+import {ApiService} from '../../api.service';
 
 @Component({
   selector: 'app-single-issue',
@@ -13,7 +13,7 @@ export class SingleIssueComponent implements OnInit {
   id: number;
   subject: string;
   name: string;
-  issue: Issues[];
+  issue: Issues;
   entries: any;
   spentTime: number = null;
 
@@ -33,11 +33,11 @@ export class SingleIssueComponent implements OnInit {
   public getIssue() {
     this.apiService
         .getSingleIssue( this.id )
-        .subscribe((response) => {
+        .subscribe((response: Issues) => {
               this.issue = response;
               console.log(this.issue);
             },
-            (error) => { alert("Error!")});
+            (error) => { alert('Error!'); });
   }
 
   public getEntriesList() {
