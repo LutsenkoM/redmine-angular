@@ -1,3 +1,9 @@
 <div class="container">
-        <router-outlet class="col-12"></router-outlet>
+        <nav class="nav nav-pills flex-column flex-sm-row">
+                <p class="alert-dark">Redmine</p>
+                <a class="flex-sm-fill text-sm-center nav-link" [routerLink]="'/projects'">Projects</a>
+                <a class="flex-sm-fill text-sm-center nav-link" [routerLink]="'/login'">Login</a>
+        </nav>
+        <router-outlet class="col-12">
+        </router-outlet>
 </div>

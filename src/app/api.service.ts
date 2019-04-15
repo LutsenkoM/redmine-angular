@@ -15,7 +15,7 @@ const headers = new HttpHeaders({
 
 export class ApiService {
 
-  apiURL: string = 'https://redmine.ekreative.com';
+  private apiURL = 'https://redmine.ekreative.com';
 
   constructor(private httpClient: HttpClient) {}
 

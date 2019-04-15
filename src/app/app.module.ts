@@ -11,6 +11,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MyOwnCustomMaterialModule} from "./material";
 import { SingleProjectComponent } from './components/single-project/single-project.component';
 import { SingleIssueComponent } from './components/single-issue/single-issue.component';
+import { LoginRegistrationComponent } from './components/login-registration/login-registration.component';
+import {AuthService} from './auth.service';
+import {AuthGuardService} from './auth-guard.service';
 
 
 @NgModule({
@@ -18,7 +21,8 @@ import { SingleIssueComponent } from './components/single-issue/single-issue.com
     AppComponent,
     ProjectsComponent,
     SingleProjectComponent,
-    SingleIssueComponent
+    SingleIssueComponent,
+    LoginRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ import { SingleIssueComponent } from './components/single-issue/single-issue.com
     BrowserAnimationsModule,
     MyOwnCustomMaterialModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
