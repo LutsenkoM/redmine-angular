@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {ApiService} from '../../api.service';
-import {Issues} from '../../issues';
-
-// import {Projects} from "../../projects";
+import { ActivatedRoute, Params } from '@angular/router';
+import { ApiService } from '../../api.service';
+import { Issues } from '../../issues';
 
 @Component({
   selector: 'app-single-project',
@@ -17,7 +15,7 @@ export class SingleProjectComponent implements OnInit {
   newIssue: string;
   newComment: string;
   issues: Issues[] = [];
-  comments: Array<string> = [];
+  comments: Array<{text: string}> = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -29,7 +27,11 @@ export class SingleProjectComponent implements OnInit {
 
     this.getIssuesList();
 
-    this.comments.push(JSON.parse(localStorage.getItem('comments') ));
+    if (JSON.parse(localStorage.getItem(`comments-project#${this.id}`) )) {
+        this.comments = (JSON.parse(localStorage.getItem(`comments-project#${this.id}`) ));
+    } else {
+        this.comments = [];
+    }
 
   }
 
@@ -55,9 +57,9 @@ export class SingleProjectComponent implements OnInit {
 
 
   public addComment() {
-      this.comments.push(this.newComment);
+      this.comments.push({text: this.newComment});
+      localStorage.setItem(`comments-project#${this.id}`, JSON.stringify( this.comments ));
       this.newComment = '';
-      localStorage.setItem('comments', JSON.stringify( this.comments ));
   }
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Issues} from '../../issues';
-import {ActivatedRoute, Params} from '@angular/router';
-import {ApiService} from '../../api.service';
+import { Issues } from '../../issues';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-single-issue',
