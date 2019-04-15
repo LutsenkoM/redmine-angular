@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ApiService} from '../../api.service';
 import {Issues} from '../../issues';
-import {Projects} from "../../projects";
+
+// import {Projects} from "../../projects";
 
 @Component({
   selector: 'app-single-project',
@@ -14,7 +15,9 @@ export class SingleProjectComponent implements OnInit {
   id: number;
   name: string;
   newIssue: string;
+  newComment: string;
   issues: Issues[] = [];
+  comments: Array<string> = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -26,9 +29,12 @@ export class SingleProjectComponent implements OnInit {
 
     this.getIssuesList();
 
+    this.comments.push(JSON.parse(localStorage.getItem('comments') ));
+
   }
 
   public getIssuesList() {
+
       this.apiService
           .getIssues( this.id )
           .subscribe((issues: Issues[]) => {
@@ -45,6 +51,13 @@ export class SingleProjectComponent implements OnInit {
             this.getIssuesList();
         });
     this.newIssue = '';
+  }
+
+
+  public addComment() {
+      this.comments.push(this.newComment);
+      this.newComment = '';
+      localStorage.setItem('comments', JSON.stringify( this.comments ));
   }
 
 
