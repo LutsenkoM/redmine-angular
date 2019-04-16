@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Projects } from '../../projects';
+import {AuthService} from '../../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -11,7 +13,7 @@ export class ProjectsComponent implements OnInit {
 
   projects: Projects[] = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private auth: AuthService) {}
 
   ngOnInit() {
     this.apiService
@@ -22,4 +24,7 @@ export class ProjectsComponent implements OnInit {
         });
   }
 
+    public clickLogout() {
+        this.auth.logout();
+    }
 }

@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +7,9 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title = 'redmine-angular';
-
-  showLogin = true;
-
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-
-  }
-
-  public clickLogout() {
-      this.showLogin = true;
-      this.auth.logout();
   }
 
 }

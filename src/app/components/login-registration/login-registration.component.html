@@ -1,49 +1,50 @@
 <div class="row">
     <div class="col-6">
         <h2>Login</h2>
-
         <form [formGroup]="formLog" (ngSubmit)="changeAuthStatus()">
-            <div class="form-group">
-                <label>Email</label>
+            <div class="form-group" [ngClass]="{'has-error': formLog.get('email').invalid && formLog.get('email').touched}">
+                <label>Email*</label>
                 <input type="text" class="form-control" formControlName="email">
+                <p *ngIf="formLog.get('email').invalid && formLog.get('email').touched">Email should not be empty</p>
             </div>
-            <div class="form-group">
-                <label>Password</label>
+            <div class="form-group" [ngClass]="{'has-error': formLog.get('pass').invalid && formLog.get('pass').touched}">
+                <label>Password*</label>
                 <input type="password" class="form-control" formControlName="pass">
+                <p *ngIf="formLog.get('pass').invalid && formLog.get('pass').touched">Password should not be empty</p>
+                <p *ngIf="formLog.get('pass').hasError('minlength')">Password can be min 6 characters long.</p>
             </div>
-            <button class="btn btn-success" type="submit">Login</button>
+            <button class="btn btn-success" type="submit" [disabled]="formLog.invalid">Login</button>
+            <p *ngIf="errorMessageLog">Wrong Email or password</p>
         </form>
-        <button class="btn btn-success" (click)="changeAuthStatus('login')">Login</button>
-
     </div>
-
-
-
-
     <div class="col-6">
-
-        <h2>Registrate</h2>
-
+        <h2>Create an account</h2>
         <form [formGroup]="formReg" (ngSubmit)="onSubmitReg()">
-            <div class="form-group">
-                <label>Name</label>
+            <div class="form-group" [ngClass]="{'has-error': formReg.get('name').invalid && formReg.get('name').touched}">
+                <label>Name*</label>
                 <input type="text" class="form-control" formControlName="name">
+                <p *ngIf="formReg.get('name').invalid && formReg.get('name').touched">Name should not be empty</p>
             </div>
-            <div class="form-group">
-                <label>Email</label>
+            <div class="form-group" [ngClass]="{'has-error': formReg.get('email').invalid && formReg.get('email').touched}">
+                <label>Email*</label>
                 <input type="text" class="form-control" formControlName="email">
+                <p *ngIf="formReg.get('email').invalid && formReg.get('email').touched">Email should not be empty</p>
             </div>
-            <div class="form-group">
-                <label>Password</label>
+            <div class="form-group" [ngClass]="{'has-error': formReg.get('pass').invalid && formReg.get('pass').touched}">
+                <label>Password*</label>
                 <input type="password" class="form-control" formControlName="pass">
+                <p *ngIf="formReg.get('pass').invalid && formReg.get('pass').touched">Password should not be empty</p>
+                <p *ngIf="formReg.get('pass').hasError('minlength')">Password can be min 6 characters long.</p>
             </div>
-            <button class="btn btn-success" type="submit">Registre</button>
+            <div class="form-group" [ngClass]="{'has-error': formReg.get('passConfirm').invalid && formReg.get('passConfirm').touched}">
+                <label>Confirm password*</label>
+                <input type="password" class="form-control" formControlName="passConfirm">
+                <p *ngIf="formReg.get('passConfirm').invalid && formReg.get('passConfirm').touched">Confirm password should not be empty</p>
+                <p *ngIf="formReg.get('passConfirm').hasError('minlength')">Confirm password can be min 6 characters long.</p>
+            </div>
+            <button class="btn btn-success" type="submit" [disabled]="formReg.invalid" >Create</button>
+            <p *ngIf="successMessage">Thanks! You can login now</p>
+            <p *ngIf="errorMessage">Passwords must match</p>
         </form>
-
-
-        <button class="btn btn-danger" (click)="changeAuthStatus('logout')">LogOut</button>
     </div>
-
-
-
 </div>

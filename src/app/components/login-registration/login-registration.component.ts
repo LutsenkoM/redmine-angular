@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../auth.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import { AuthService } from '../../auth.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-registration',
@@ -13,80 +13,66 @@ export class LoginRegistrationComponent implements OnInit {
   formLog: FormGroup;
   formUsers = [];
   users = [];
-
   emailLog: string;
-  emailReg: string;
   passLog: string;
-  passReg: string;
-
+  successMessage = false;
+  errorMessage = false;
+  errorMessageLog = false;
   logIndex: number;
-  constructor(private auth: AuthService) { }
+
+  constructor(private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-      this.formReg = new FormGroup({
-          name: new FormControl(''),
-          email: new FormControl(''),
-          pass: new FormControl('')
+      this.formReg = this.formBuilder.group({
+          name: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email]],
+          pass: ['', [Validators.required, Validators.minLength(6)]],
+          passConfirm: ['', Validators.required]
       });
-      this.formLog = new FormGroup({
-          email: new FormControl(''),
-          pass: new FormControl('')
+
+      this.formLog = this.formBuilder.group({
+          email: ['', [Validators.required, Validators.email]],
+          pass: ['', [Validators.required, Validators.minLength(6)]],
       });
   }
 
     onSubmitReg() {
-        console.log('Submited!', this.formReg.value);
-        this.formUsers.push({'email': this.formReg.value.email, 'password': this.formReg.value.pass, 'name': this.formReg.value.name });
-        localStorage.setItem(`users`, JSON.stringify( this.formUsers ));
-    }
-
-    onSubmitLog() {
-        // console.log('Login!', this.formLog.value);
+        if ( this.formReg.value.pass === this.formReg.value.passConfirm ) {
+            this.formUsers.push({'email': this.formReg.value.email, 'password': this.formReg.value.pass, 'name': this.formReg.value.name });
+            localStorage.setItem(`users`, JSON.stringify( this.formUsers ));
+            this.successMessage = true;
+            setTimeout(() => { this.successMessage = false; } , 5000);
+        } else {
+            this.errorMessage = true;
+            setTimeout(() => { this.errorMessage = false; } , 5000);
+        }
+        this.formReg.reset();
     }
 
   changeAuthStatus() {
 
     this.emailLog = this.formLog.value.email;
     this.passLog = this.formLog.value.pass;
-    // this.emailReg = this.formReg.value.email;
-    // this.passReg = this.formReg.value.pass;
-    //
+    this.users = (JSON.parse(localStorage.getItem(`users`) ));
+    this.logIndex = this.users.findIndex(obj => obj.email === this.emailLog);
 
-    //
-    //
+    if (this.logIndex < 0) {
+        this.errorMessageLog = true;
+        setTimeout(() => { this.errorMessageLog = false; } , 5000);
+        this.formLog.reset();
+        return;
+    }
 
-      this.users = (JSON.parse(localStorage.getItem(`users`) ));
-
-
-
-      this.logIndex = this.users.findIndex(obj => obj.email === this.emailLog);
-
-      // this.passReg = this.formUsers[this.logIndex].password;
-
-
-      console.log('storage array' + this.users);
-      console.log( 'num' , this.users.findIndex(obj => obj.email === this.emailLog)) ;
-      console.log('Log index array', this.logIndex);
-      console.log('Object in array', this.users[this.logIndex]);
-      // console.log('passReg' + this.passReg, 'passLog' + this.passLog );
-
-      if (this.passLog === this.users[this.logIndex].password) {
-            this.auth.login();
-      } else {
-        alert('Wrong login or email');
-      }
+    if ( this.logIndex < 0 && this.passLog !== this.users[this.logIndex].password ) {
+        this.errorMessageLog = true;
+        setTimeout(() => { this.errorMessageLog = false; } , 5000);
+        this.formLog.reset();
+    } else {
+        this.auth.login();
+    }
 
 
-    // if (status === 'login') {
-    //   this.auth.login();
-    //   console.log('change login');
-    // } else {
-    //   this.auth.logout();
-    //   console.log('change logout');
-    // }
 
   }
-
-
 
 }
