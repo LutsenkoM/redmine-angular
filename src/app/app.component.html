@@ -1,7 +1,7 @@
 <div class="container">
-        <nav class="nav nav-pills flex-column flex-sm-row">
-                <p class="alert-dark">Redmine</p>
-        </nav>
+    <nav class="nav nav-pills flex-column flex-sm-row text-center">
+        <a [routerLink]="['/projects']" class="logo"><img src="../assets/redminelogo.png" class="img-fluid"></a>
+    </nav>
 
-        <router-outlet class="col-12"></router-outlet>
+    <router-outlet></router-outlet>
 </div>

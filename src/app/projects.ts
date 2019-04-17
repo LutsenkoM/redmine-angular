@@ -4,5 +4,5 @@ export class Projects {
     identifier: string;
     description: string;
     status: number;
-    custom_fields: [];
+    custom_fields: Array<any> = [];
 }

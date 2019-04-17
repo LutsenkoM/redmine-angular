@@ -1,41 +1,43 @@
+<div class="col-xs-12">
+    <hr/>
+    <b><a [routerLink]="['/projects']"><< Back to projects</a></b>
+    <hr/>
+    <h1>{{subject}}, #{{id}}</h1>
+    <p *ngIf="issue.issue.total_spent_hours"> Spent time: {{issue.issue.total_spent_hours}}h</p>
 
-    <div class="col-xs-12">
-        <b><a [routerLink]="['/projects']"><< Back to projects</a></b>
-        <hr/>
-        <h1>{{subject}}, #{{id}}</h1>
-        <p *ngIf="issue.issue.total_spent_hours"> Spent time: {{issue.issue.total_spent_hours}}h</p>
-
-        <div class="input-group">
-            <input  [(ngModel)]="spentTime" type="text"
-                    class="form-control"
-                    placeholder="Track time"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-success" type="button" (click)="trackTime()">Track</button>
-            </div>
+    <div class="input-group">
+        <input [(ngModel)]="spentTime" type="text"
+               class="form-control"
+               placeholder="Track time"
+               aria-label="Recipient's username"
+               aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-success" type="button" (click)="trackTime()">Track</button>
         </div>
-        <br/>
-        <table class="table" *ngIf="issue.issue.total_spent_hours">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Date</th>
-                <th scope="col">Name</th>
-                <th scope="col">Hours</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let entry of entries.time_entries">
-                <th scope="row">1</th>
-                <td>{{entry.updated_on | date:'medium'}}</td>
-                <td>{{entry.user.name}}</td>
-                <td>{{entry.hours}}</td>
-                <td align="right"><button class="btn btn-danger" (click)="deleteEntrie(entry)">Delete</button></td>
-            </tr>
-            </tbody>
-        </table>
     </div>
+    <br/>
+    <table class="table" *ngIf="issue.issue.total_spent_hours">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Hours</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let entry of entries.time_entries; index as i">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{entry.updated_on | date:'medium'}}</td>
+            <td>{{entry.user.name}}</td>
+            <td>{{entry.hours}}</td>
+            <td align="right">
+                <button class="btn btn-danger" (click)="deleteEntrie(entry)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 
