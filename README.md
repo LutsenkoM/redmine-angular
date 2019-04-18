@@ -1,3 +1,8 @@
+# How to use
+1. First of all you should register in project. this data set in localstorage
+2. Login to your account
+3. You can create tasks for each project, add comments to project,
+
 # RedmineAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
