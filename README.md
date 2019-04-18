@@ -1,7 +1,8 @@
 # How to use
 1. First of all you should register in project. this data set in localstorage
 2. Login to your account
-3. You can create tasks for each project, add comments to project,
+3. You can create tasks for each project, add comments to project, track and delete hours.
+4. Link to live webapp https://redmine-angular.firebaseapp.com/
 
 # RedmineAngular
 
