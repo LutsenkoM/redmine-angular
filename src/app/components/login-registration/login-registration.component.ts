@@ -63,7 +63,7 @@ export class LoginRegistrationComponent implements OnInit {
         this.passLog = this.formLog.value.pass;
         this.users = (JSON.parse(localStorage.getItem(`users`)));
         this.logIndex = this.users.findIndex(obj => obj.email === this.emailLog);
-        this.logIndexPass = this.users.findIndex(obj => obj.pass === this.passLog);
+        this.logIndexPass = this.users.findIndex(obj => obj.password === this.passLog);
 
         if (this.logIndex < 0 || this.logIndexPass < 0) {
             this.errorMessageLog = true;
@@ -74,7 +74,7 @@ export class LoginRegistrationComponent implements OnInit {
             return;
         }
 
-        if (this.logIndex < 0 && this.passLog !== this.users[this.logIndex].password ) {
+        if (this.logIndex < 0 && this.passLog !== this.users[this.logIndex].password) {
             this.errorMessageLog = true;
             setTimeout(() => {
                 this.errorMessageLog = false;
