@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ApiService} from '../../api.service';
 
 @Component({
     selector: 'app-login-registration',
@@ -23,7 +24,7 @@ export class LoginRegistrationComponent implements OnInit {
     storLogin: string;
     storPass: string;
 
-    constructor(private auth: AuthService, private formBuilder: FormBuilder) {
+    constructor(private auth: AuthService, private formBuilder: FormBuilder, private apiService: ApiService) {
     }
 
     ngOnInit() {
@@ -35,7 +36,7 @@ export class LoginRegistrationComponent implements OnInit {
         });
 
         this.formLog = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
+            email: ['', Validators.required],
             pass: ['', [Validators.required, Validators.minLength(6)]],
         });
     }
@@ -59,33 +60,52 @@ export class LoginRegistrationComponent implements OnInit {
 
     changeAuthStatus() {
 
-        this.emailLog = this.formLog.value.email;
-        this.passLog = this.formLog.value.pass;
-        this.users = (JSON.parse(localStorage.getItem(`users`)));
-        this.logIndex = this.users.findIndex(obj => obj.email === this.emailLog);
-        this.logIndexPass = this.users.findIndex(obj => obj.password === this.passLog);
-
-        if (this.logIndex < 0 || this.logIndexPass < 0) {
-            this.errorMessageLog = true;
-            setTimeout(() => {
-                this.errorMessageLog = false;
-            }, 5000);
-            this.formLog.reset();
-            return;
-        }
-
-        if (this.logIndex < 0 && this.passLog !== this.users[this.logIndex].password) {
-            this.errorMessageLog = true;
-            setTimeout(() => {
-                this.errorMessageLog = false;
-            }, 5000);
-            this.formLog.reset();
-        } else {
-            localStorage.setItem(`token`, JSON.stringify({'email': this.emailLog, 'pass': this.passLog}));
-            this.auth.login();
-        }
+        // console.log(this.formLog.value.email, this.formLog.value.pass);
+        this.apiService
+            .logined(this.formLog.value.email, this.formLog.value.pass )
+            .subscribe((response) => {
+                console.log(response);
+            });
 
 
+        // this.apiService.login( this.emailLog, this.passLog ).then(res => {
+        //     this.auth.login();
+        // }).catch(e => {
+        //     if (e.status === 'INVALID') {
+        //         this.errorMessageLog = true;
+        //         setTimeout(() => {
+        //             this.errorMessageLog = false;
+        //         }, 5000);
+        //         this.formLog.reset();
+        //     }
+        // });
+
+
+        // this.emailLog = this.formLog.value.email;
+        // this.passLog = this.formLog.value.pass;
+        // this.users = (JSON.parse(localStorage.getItem(`users`)));
+        // this.logIndex = this.users.findIndex(obj => obj.email === this.emailLog);
+        // this.logIndexPass = this.users.findIndex(obj => obj.password === this.passLog);
+        //
+        // if (this.logIndex < 0 || this.logIndexPass < 0) {
+        //     this.errorMessageLog = true;
+        //     setTimeout(() => {
+        //         this.errorMessageLog = false;
+        //     }, 5000);
+        //     this.formLog.reset();
+        //     return;
+        // }
+        //
+        // if (this.logIndex < 0 && this.passLog !== this.users[this.logIndex].password) {
+        //     this.errorMessageLog = true;
+        //     setTimeout(() => {
+        //         this.errorMessageLog = false;
+        //     }, 5000);
+        //     this.formLog.reset();
+        // } else {
+        //     localStorage.setItem(`token`, JSON.stringify({'email': this.emailLog, 'pass': this.passLog}));
+        //     this.auth.login();
+        // }
     }
 
 }

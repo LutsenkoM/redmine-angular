@@ -10,17 +10,24 @@ import {AuthService} from '../../auth.service';
 })
 export class ProjectsComponent implements OnInit {
 
-    projects: Projects[] = [];
+    // projects: Projects[] = [];
 
     constructor(private apiService: ApiService, private auth: AuthService) {
     }
 
     ngOnInit() {
+        // this.apiService
+        //     .getProject()
+        //     .subscribe((projects: Projects[]) => {
+        //         this.projects = projects;
+        //     });
+
         this.apiService
-            .getProject()
-            .subscribe((projects: Projects[]) => {
-                this.projects = projects;
+            .getUser()
+            .subscribe((response) => {
+                console.log(response);
             });
+
     }
 
     public clickLogout() {
