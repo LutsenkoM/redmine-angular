@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -8,27 +9,25 @@ import {Observable} from 'rxjs';
 
 export class ApiService {
 
-    private apiURL = 'https://redmine.ekreative.com';
-
     private headers: HttpHeaders;
 
     constructor(private httpClient: HttpClient) {
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'X-Redmine-API-Key': '2fda745bb4cdd835fdf41ec1fab82a13ddc1a54c',
+            'X-Redmine-API-Key': environment.api.token,
         });
     }
 
     public getProject(): Observable<any> {
-        return this.httpClient.get(`${this.apiURL}/projects.json`, {headers: this.headers});
+        return this.httpClient.get(`${environment.api.host}/projects.json`, {headers: this.headers});
     }
 
     public getIssues(id: any): Observable<any> {
-        return this.httpClient.get(`${this.apiURL}/issues.json?project_id=${id}`, {headers: this.headers});
+        return this.httpClient.get(`${environment.api.host}/issues.json?project_id=${id}`, {headers: this.headers});
     }
 
     public getSingleIssue(id: any): Observable<any> {
-        return this.httpClient.get(`${this.apiURL}/issues/${id}.json`, {headers: this.headers});
+        return this.httpClient.get(`${environment.api.host}/issues/${id}.json`, {headers: this.headers});
     }
 
     public addIssue(newIssue: string, projectId: number): Observable<any> {
@@ -39,7 +38,7 @@ export class ApiService {
                 'priority_id': 4
             }
         };
-        return this.httpClient.post(`${this.apiURL}/issues.json`, data, {headers: this.headers});
+        return this.httpClient.post(`${environment.api.host}/issues.json`, data, {headers: this.headers});
     }
 
     public trackIssue(issuesId: number, hours: number): Observable<any> {
@@ -50,15 +49,15 @@ export class ApiService {
             }
         };
 
-        return this.httpClient.post(`${this.apiURL}/time_entries.json`, data, {headers: this.headers});
+        return this.httpClient.post(`${environment.api.host}/time_entries.json`, data, {headers: this.headers});
     }
 
     public entriesIssue(issuesId: number): Observable<any> {
-        return this.httpClient.get(`${this.apiURL}/time_entries.json?issue_id=${issuesId}`, {headers: this.headers});
+        return this.httpClient.get(`${environment.api.host}/time_entries.json?issue_id=${issuesId}`, {headers: this.headers});
     }
 
     public deleteEntrie(entry: any): Observable<any> {
-        return this.httpClient.delete(`${this.apiURL}/time_entries/${entry.id}.json`, {headers: this.headers});
+        return this.httpClient.delete(`${environment.api.host}/time_entries/${entry.id}.json`, {headers: this.headers});
     }
 
 }
