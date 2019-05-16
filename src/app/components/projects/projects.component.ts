@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../api.service';
-import {Projects} from '../../projects';
-import {AuthService} from '../../auth.service';
+import {ApiService} from '../../shared/services/api/api.service';
+import {Projects} from '../../shared/mocks/projects';
+import {AuthService} from '../../shared/services/auth/auth.service';
 
 @Component({
     selector: 'app-projects',

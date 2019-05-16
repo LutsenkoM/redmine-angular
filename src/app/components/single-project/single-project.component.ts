@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {ApiService} from '../../api.service';
-import {Issues} from '../../issues';
+import {ApiService} from '../../shared/services/api/api.service';
+import {Issues} from '../../shared/mocks/issues';
 
 @Component({
     selector: 'app-single-project',
@@ -13,10 +13,9 @@ export class SingleProjectComponent implements OnInit {
     id: number;
     name: string;
     newIssue: string;
-    newComment: string;
     issues: Issues[] = [];
     comments: Array<{ text: string, date: any }> = [];
-    date = new Date();
+
 
     constructor(private route: ActivatedRoute, private apiService: ApiService) {
     }
@@ -28,12 +27,6 @@ export class SingleProjectComponent implements OnInit {
         });
 
         this.getIssuesList();
-
-        if (JSON.parse(localStorage.getItem(`comments-project#${this.id}`))) {
-            this.comments = (JSON.parse(localStorage.getItem(`comments-project#${this.id}`)));
-        } else {
-            this.comments = [];
-        }
 
     }
 
@@ -58,13 +51,5 @@ export class SingleProjectComponent implements OnInit {
             });
         this.newIssue = '';
     }
-
-
-    public addComment() {
-        this.comments.push({text: this.newComment, date: this.date});
-        localStorage.setItem(`comments-project#${this.id}`, JSON.stringify(this.comments));
-        this.newComment = '';
-    }
-
 
 }

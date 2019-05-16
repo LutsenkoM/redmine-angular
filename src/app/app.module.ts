@@ -5,15 +5,18 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ProjectsComponent} from './components/projects/projects.component';
 import {HttpClientModule} from '@angular/common/http';
-import {ApiService} from './api.service';
+import {ApiService} from './shared/services/api/api.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SingleProjectComponent} from './components/single-project/single-project.component';
 import {SingleIssueComponent} from './components/single-issue/single-issue.component';
 import {LoginRegistrationComponent} from './components/login-registration/login-registration.component';
-import {AuthService} from './auth.service';
-import {AuthGuardService} from './auth-guard.service';
+import {AuthService} from './shared/services/auth/auth.service';
+import {AuthGuardService} from './shared/services/auth-guard/auth-guard.service';
 import {HomeComponent} from './components/home/home.component';
+import { LoginComponent } from './components/login-registration/login/login.component';
+import { RegistrationComponent } from './components/login-registration/registration/registration.component';
+import { CommentsComponent } from './components/single-project/comments/comments.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import {HomeComponent} from './components/home/home.component';
         SingleProjectComponent,
         SingleIssueComponent,
         LoginRegistrationComponent,
-        HomeComponent
+        HomeComponent,
+        LoginComponent,
+        RegistrationComponent,
+        CommentsComponent
     ],
     imports: [
         BrowserModule,

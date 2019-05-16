@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Issues} from '../../issues';
+import {Issues} from '../../shared/mocks/issues';
 import {ActivatedRoute, Params} from '@angular/router';
-import {ApiService} from '../../api.service';
-import {Entry} from '../../entry';
+import {ApiService} from '../../shared/services/api/api.service';
+import {Entry} from '../../shared/mocks/entry';
 
 @Component({
     selector: 'app-single-issue',

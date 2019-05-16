@@ -1,0 +1,21 @@
+<h2>Login</h2>
+<form [formGroup]="formLog" (ngSubmit)="changeAuthStatus()">
+  <div class="form-group"
+       [ngClass]="{'has-error': formLog.get('email').invalid && formLog.get('email').touched}">
+    <label>Email*</label>
+    <input type="text" class="form-control" formControlName="email">
+    <p *ngIf="formLog.get('email').invalid && formLog.get('email').touched" class="alert alert-danger">Email
+      should not be empty</p>
+  </div>
+  <div class="form-group"
+       [ngClass]="{'has-error': formLog.get('pass').invalid && formLog.get('pass').touched}">
+    <label>Password*</label>
+    <input type="password" class="form-control" formControlName="pass">
+    <p *ngIf="formLog.get('pass').invalid && formLog.get('pass').touched" class="alert alert-danger">
+      Password should not be empty</p>
+    <p *ngIf="formLog.get('pass').hasError('minlength')" class="alert alert-danger">Password can be min 6
+      characters long.</p>
+  </div>
+  <button class="btn btn-success" type="submit" [disabled]="formLog.invalid">Login</button>
+  <p *ngIf="errorMessageLog" class="alert alert-danger">Wrong Email or password</p>
+</form>

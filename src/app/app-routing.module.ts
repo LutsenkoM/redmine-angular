@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {ProjectsComponent} from './components/projects/projects.component';
 import {SingleProjectComponent} from './components/single-project/single-project.component';
 import {SingleIssueComponent} from './components/single-issue/single-issue.component';
-import {AuthGuardService} from './auth-guard.service';
+import {AuthGuardService} from './shared/services/auth-guard/auth-guard.service';
 import {HomeComponent} from './components/home/home.component';
 
 const routes: Routes = [
