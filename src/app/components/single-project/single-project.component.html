@@ -17,7 +17,7 @@
             </div>
             <hr/>
             <ul class="list-group">
-                <li *ngFor="let issue of issues.issues" class="list-group-item">
+                <li *ngFor="let issue of issues" class="list-group-item">
                     <h3><a [routerLink]="['/projects', id, name, issue.id, issue.subject ]">{{issue.subject}},
                         #{{issue.id}}</a></h3>
                     <p>Date <span class="badge badge-secondary">{{issue.start_date | date: 'mediumDate'}}</span></p>
@@ -49,6 +49,5 @@
         </div>
 
     </div>
-    <!--    </div>-->
 </div>
 

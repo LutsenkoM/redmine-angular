@@ -8,7 +8,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {ApiService} from './api.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MyOwnCustomMaterialModule} from './material';
 import {SingleProjectComponent} from './components/single-project/single-project.component';
 import {SingleIssueComponent} from './components/single-issue/single-issue.component';
 import {LoginRegistrationComponent} from './components/login-registration/login-registration.component';
@@ -32,8 +31,7 @@ import {HomeComponent} from './components/home/home.component';
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
-        BrowserAnimationsModule,
-        MyOwnCustomMaterialModule
+        BrowserAnimationsModule
     ],
     providers: [ApiService, AuthService, AuthGuardService],
     bootstrap: [AppComponent]

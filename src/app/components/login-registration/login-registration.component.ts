@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-login-registration',
@@ -20,8 +20,6 @@ export class LoginRegistrationComponent implements OnInit {
     errorMessageLog = false;
     logIndex: number;
     logIndexPass: number;
-    storLogin: string;
-    storPass: string;
 
     constructor(private auth: AuthService, private formBuilder: FormBuilder) {
     }

@@ -3,7 +3,7 @@
     <b><a [routerLink]="['/projects']"><< Back to projects</a></b>
     <hr/>
     <h1>{{subject}}, #{{id}}</h1>
-    <p *ngIf="issue.issue.total_spent_hours"> Spent time: {{issue.issue.total_spent_hours}}h</p>
+    <p *ngIf="total_spent_hours"> Spent time: {{total_spent_hours}}h</p>
 
     <div class="input-group">
         <input [(ngModel)]="spentTime" type="text"
@@ -16,7 +16,7 @@
         </div>
     </div>
     <br/>
-    <table class="table" *ngIf="issue.issue.total_spent_hours">
+    <table class="table" *ngIf="total_spent_hours">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let entry of entries.time_entries; index as i">
+        <tr *ngFor="let entry of entries; index as i">
             <th scope="row">{{i + 1}}</th>
             <td>{{entry.updated_on | date:'medium'}}</td>
             <td>{{entry.user.name}}</td>
