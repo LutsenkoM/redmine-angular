@@ -27,7 +27,6 @@ export class SingleProjectComponent implements OnInit {
         });
 
         this.getIssuesList();
-
     }
 
     public getIssuesList() {
