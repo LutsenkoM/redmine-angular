@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
@@ -8,19 +8,16 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class CommentsComponent implements OnInit {
 
-  id: number;
-  name: string;
   comments: Array<{ text: string, date: any }> = [];
   newComment: string;
   date = new Date();
 
+  @Input() id: number;
+  @Input() name: string;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-      this.route.params.subscribe((params: Params) => {
-          this.id = +params['id'];
-          this.name = params['name'];
-      });
 
       if (JSON.parse(localStorage.getItem(`comments-project#${this.id}`))) {
           this.comments = (JSON.parse(localStorage.getItem(`comments-project#${this.id}`)));
